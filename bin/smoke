@@ -11,7 +11,7 @@ def escape args
 end
 
 def run_application application, args, input
-  IO.popen "#{application} #{escape args}", 'r+' do |io|
+  IO.popen "#{unescape(application)} #{escape args}", 'r+' do |io|
     io.write input
     io.close_write
     io.read.strip
@@ -99,5 +99,10 @@ def highlight text
   highlighted.gsub("\n", "\n            ")
 end
 
-run_tests(read_tests(ARGV[0]), ARGV[1])
+def unescape filename
+  filename.gsub(/\\\//, File::SEPARATOR).
+           sub(/\\\./, '.')
+end
+
+run_tests(read_tests(unescape(ARGV[0])), ARGV[1])
 print_summary
