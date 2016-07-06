@@ -81,7 +81,11 @@ We might want to assert that certain things fail. For example, postfix notation 
 
 In order to run tests against an application, you simply invoke Smoke with the command required to invoke the application, and the directory containing the tests. Given an application that is invoked with `ruby bin/calculator.rb`, and the tests in the *test* directory, we would run the tests as follows:
 
-    smoke test
+    smoke 'bin/calculator.rb' test
+
+Smoke (alpha) supports Windows commandline. Be aware that for scripts you always have to provide the interpreter as well, e.g. `bin/calculator.rb` is not executable but `ruby bin/calculator.rb` is. We would run the tests as follows:
+
+    smoke.bat 'ruby bin/calculator.rb' test
 
 Tests can also be passed on an individual basis:
 
