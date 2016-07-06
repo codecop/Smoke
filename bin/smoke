@@ -62,7 +62,7 @@ def create_readable_error(application, errno)
   # no case/when because === does not work on class?
   if errno.class == Errno::ENOENT
     raise NoSuchApplicationError, application[0]
-  elsif errno.class == Errno::ENOEXEC
+  elsif errno.class == Errno::ENOEXEC or errno.class == Errno::EACCES
     raise NonExecutableApplicationError, application[0]
   else
     raise errno
