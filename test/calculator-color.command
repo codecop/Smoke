@@ -1,2 +1,2 @@
-bin/smoke
+bin/smoke.bat
 --color
