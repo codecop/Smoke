@@ -25,4 +25,4 @@ def rot13(string)
   }.join
 end
 
-puts rot13 $stdin.read
+puts rot13($stdin.read)

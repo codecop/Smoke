@@ -22,6 +22,7 @@ FILE_TYPES = {
 
 module Enumerable
   unless method_defined?(:to_h)
+
     def to_h
       hash = {}
       each do |key, value|
@@ -36,12 +37,14 @@ class SmokeError < StandardError
 end
 
 class NoSuchApplicationError < SmokeError
+
   def initialize(name)
     super "The application #{name.inspect} does not exist."
   end
 end
 
 class NonExecutableApplicationError < SmokeError
+
   def initialize(name)
     super "The application #{name.inspect} is not executable."
   end
@@ -90,7 +93,7 @@ end
 def run_tests(application, tests)
   tests.each do |name, args, input, expected_output, expected_error, expected_status|
     puts name
-    next failed 'no outputs provided' if expected_output.empty? && expected_error.empty?
+    next failed('no outputs provided') if expected_output.empty? && expected_error.empty?
 
     output, error, status = run_application application, args, input
 
@@ -130,9 +133,9 @@ def print_summary
   test_summary = "#{count} #{pluralize(count, 'test', 'tests')}"
   failure_summary = "#{@failures} #{pluralize(@failures, 'failure', 'failures')}"
   if @failures == 0
-    puts green "#{test_summary}, #{failure_summary}"
+    puts green("#{test_summary}, #{failure_summary}")
   else
-    puts red "#{test_summary}, #{failure_summary}"
+    puts red("#{test_summary}, #{failure_summary}")
   end
 end
 
@@ -153,14 +156,16 @@ def red(string)
 end
 
 @successes = 0
+
 def succeeded(*messages)
-  puts green messages.collect { |message| '  ' + message }.join "\n"
+  puts green(messages.collect { |message| '  ' + message }.join("\n"))
   @successes += 1
 end
 
 @failures = 0
+
 def failed(*messages)
-  puts red messages.collect { |message| '  ' + message }.join "\n"
+  puts red(messages.collect { |message| '  ' + message }.join("\n"))
   @failures += 1
 end
 
