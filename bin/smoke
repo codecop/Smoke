@@ -24,6 +24,7 @@ FILE_TYPES = {
 
 module Enumerable
   unless method_defined?(:to_h)
+
     def to_h
       hash = {}
       each do |key, value|
@@ -56,12 +57,14 @@ class NoOutputFilesError < SmokeError
 end
 
 class NoSuchApplicationError < SmokeError
+
   def initialize(name)
     super "The application #{name.inspect} does not exist."
   end
 end
 
 class NonExecutableApplicationError < SmokeError
+
   def initialize(name)
     super "The application #{name.inspect} is not executable."
   end
@@ -187,9 +190,9 @@ def print_summary
   test_summary = "#{count} #{pluralize(count, 'test', 'tests')}"
   failure_summary = "#{@failures} #{pluralize(@failures, 'failure', 'failures')}"
   if @failures.zero?
-    puts green "#{test_summary}, #{failure_summary}"
+    puts green("#{test_summary}, #{failure_summary}")
   else
-    puts red "#{test_summary}, #{failure_summary}"
+    puts red("#{test_summary}, #{failure_summary}")
   end
 end
 
@@ -210,14 +213,16 @@ def red(string)
 end
 
 @successes = 0
+
 def succeeded(*messages)
-  puts green messages.collect { |message| '  ' + message }.join "\n"
+  puts green(messages.collect { |message| '  ' + message }.join("\n"))
   @successes += 1
 end
 
 @failures = 0
+
 def failed(*messages)
-  puts red messages.collect { |message| '  ' + message }.join "\n"
+  puts red(messages.collect { |message| '  ' + message }.join("\n"))
   @failures += 1
 end
 
