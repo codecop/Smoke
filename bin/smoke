@@ -8,8 +8,8 @@ RED = "\e[31m".freeze
 RESET = "\e[0m".freeze
 
 GLOB_PATTERNS = [
-  ->(root) { "#{root}/*.*" },
-  ->(root) { "#{root}.*" },
+  lambda {|root| "#{root}/*.*" },
+  lambda {|root| "#{root}.*" },
 ].freeze
 
 FILE_TYPES = {
