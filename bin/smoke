@@ -89,15 +89,16 @@ def validate_application(test_name, command)
 end
 
 def run_application(command, args, input)
-  output, error, status = Open3.capture3(*(command + args), stdin_data: input)
+  cmd = *(command + args)
+  output, error, status = Open3.capture3(cmd, stdin_data: input)
   output.strip!
   error.strip!
   [output, error, status.exitstatus]
 end
 
 def read_tests(roots, command_override)
-  roots
-    .collect_concat { |root|
+  roots.
+    collect_concat { |root|
       root_command_file = ["#{root}/command", "#{File.dirname(root)}/command"].find { |c| File.exist?(c) }
       root_command = root_command_file ? IO.read(root_command_file).strip : nil
       all_files = GLOB_PATTERNS.collect_concat { |pattern| Dir.glob(pattern.call(root)) }.sort
@@ -106,20 +107,20 @@ def read_tests(roots, command_override)
 end
 
 def harvest(command_override, root_command, all_files)
-  all_files
-    .collect { |file| [File.basename(file, '.*'), look_up_extension(File.extname(file)), file] }
-    .reject { |_, type, _| type.nil? }
-    .group_by { |name, _, _| name }
-    .collect { |name, files|
-      categorized_files = files
-        .collect { |_, type, file| [type, IO.read(file).strip] }
-        .group_by { |type, _| type }
-        .collect { |type, types_and_files| [type, types_and_files.collect { |_, file| file }] }
-        .to_h
+  all_files.
+    collect { |file| [File.basename(file, '.*'), look_up_extension(File.extname(file)), file] }.
+    reject { |_, type, _| type.nil? }.
+    group_by { |name, _, _| name }.
+    collect { |name, files|
+      categorized_files = files.
+        collect { |_, type, file| [type, IO.read(file).strip] }.
+        group_by { |type, _| type }.
+        collect { |type, types_and_files| [type, types_and_files.collect { |_, file| file }] }.
+        to_h
       [name, categorized_files]
-    }
-    .sort_by { |name, _| name }
-    .collect { |name, files|
+    }.
+    sort_by { |name, _| name }.
+    collect { |name, files|
       command =
         if command_override
           command_override
