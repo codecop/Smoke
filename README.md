@@ -14,13 +14,12 @@ The *smoke* binary requires Ruby 1.9.3 or greater. It does not require any addit
 
 You can also run Smoke using [Docker][] without any further installation. See below for more information.
 
-Smoke is distributed under [the MIT license][the MIT license].
+Smoke is distributed under [the MIT license][LICENSE].
 
 [bin/smoke]: https://raw.githubusercontent.com/SamirTalwar/Smoke/master/bin/smoke
 [bin/smoke.bat]: https://raw.githubusercontent.com/SamirTalwar/Smoke/master/bin/smoke.bat
 [LICENSE]: https://raw.githubusercontent.com/SamirTalwar/Smoke/master/LICENSE
 [Docker]: https://www.docker.com/
-[the MIT license]: http://samirtalwar.mit-license.org/
 
 ## Writing Test Cases
 
@@ -79,13 +78,9 @@ We might want to assert that certain things fail. For example, postfix notation 
 
 ## Running Tests
 
-In order to run tests against an application, you simply invoke Smoke with the command required to invoke the application, and the directory containing the tests. Given an application that is invoked with `ruby bin/calculator.rb`, and the tests in the *test* directory, we would run the tests as follows:
+In order to run tests against an application, you simply invoke Smoke with the directory containing the tests. Given the tests in the *test* directory, we would run the tests as follows:
 
-    smoke 'bin/calculator.rb' test
-
-Smoke (alpha) supports Windows commandline. Be aware that for scripts you always have to provide the interpreter as well, e.g. `bin/calculator.rb` is not executable but `ruby bin/calculator.rb` is. We would run the tests as follows:
-
-    smoke.bat 'ruby bin/calculator.rb' test
+    smoke test
 
 Tests can also be passed on an individual basis:
 
@@ -93,11 +88,15 @@ Tests can also be passed on an individual basis:
 
 To override the command, or to specify it on the command line in place of the `command` file, you can use the `--command` switch:
 
-    smoke --command='ruby calculator.rb' test
+    smoke --command='calculator.rb' test
+
+Smoke (alpha) supports Windows command line. Be aware that for scripts you always have to provide the interpreter as well, e.g. `calculator.rb` is not executable but `ruby calculator.rb` is. We would run the tests as follows:
+
+    smoke.bat --command='ruby calculator.rb' test
 
 Smoke will exit with a code of `0` if all tests succeed, `1` if any test fails, or `2` if the invocation of Smoke itself was not understood (for example, if only one argument is provided).
 
-Output will be in color if outputting to a terminal. You can force color output on or off with the `--color` and `--no-color` switches.
+Output will be in colour if outputting to a terminal. You can force colour output on or off with the `--color` and `--no-color` switches.
 
 In order to run Smoke with Docker instead, you would change the command as follows:
 
@@ -127,7 +126,7 @@ We dog-food. You can run all of Smoke's smoke tests using:
 
 On Windows, run this instead:
 
-    bin\smoke --command=bin\smoke test
+    bin\smoke --color --command=bin\smoke test
 
 Smoke development follows a few rules:
 
