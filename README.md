@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/SamirTalwar/Smoke.svg?branch=master)](https://travis-ci.org/SamirTalwar/Smoke)
+[![Build Status](https://travis-ci.org/codecop/Smoke.svg?branch=master)](https://travis-ci.org/codecop/Smoke)
 
 # Smoke
 
 *An integration test framework for console applications.*
 
-![Smoke output](https://s3-eu-west-1.amazonaws.com/samirtalwar-smoke/screenshot.png)
+![Smoke output](screenshot.png)
 
 ## Installation
 
@@ -16,9 +16,9 @@ You can also run Smoke using [Docker][] without any further installation. See be
 
 Smoke is distributed under [the MIT license][LICENSE].
 
-[bin/smoke]: https://raw.githubusercontent.com/SamirTalwar/Smoke/master/bin/smoke
-[bin/smoke.bat]: https://raw.githubusercontent.com/SamirTalwar/Smoke/master/bin/smoke.bat
-[LICENSE]: https://raw.githubusercontent.com/SamirTalwar/Smoke/master/LICENSE
+[bin/smoke]: https://raw.githubusercontent.com/codecop/Smoke/master/bin/smoke
+[bin/smoke.bat]: https://raw.githubusercontent.com/codecop/Smoke/master/bin/smoke.bat
+[LICENSE]: https://raw.githubusercontent.com/codecop/Smoke/master/LICENSE
 [Docker]: https://www.docker.com/
 
 ## Writing Test Cases
