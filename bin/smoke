@@ -89,7 +89,7 @@ def validate_application(test_name, command)
 end
 
 def run_application(command, args, input)
-  cmd = *(command + args)
+  cmd = (command + args)[0]
   output, error, status = Open3.capture3(cmd, stdin_data: input)
   output.strip!
   error.strip!
